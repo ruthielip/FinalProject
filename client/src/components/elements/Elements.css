@@ -1,0 +1,38 @@
+.popup-elm {
+	  margin: 0 auto;
+    width: 50%;
+    top: 2%;
+    right: 25%;
+	  max-height: 96%;
+	  text-align: center;
+	  background-color: white;
+    position: fixed;
+    z-index: 1005;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+
+.popup-wrapper-elm {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1004;
+}
+
+.exit-elm {
+  position: absolute;
+  background-color: transparent;
+  z-index: 1006;
+  font-size: 30px;
+  float: right;
+  margin: 0;
+  cursor: pointer;
+  right: 12px;
+  top: 32px;
+  color: black;
+}

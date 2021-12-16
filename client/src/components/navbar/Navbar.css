@@ -1,0 +1,161 @@
+.navbar {
+  height: 60px;
+  width: 100%;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 4px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  margin-bottom: 20px;
+}
+
+.main-logo {
+  font-size: 28px;
+  margin-left: 120px;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-left {
+  flex: 3;
+}
+
+.nav-center {
+  flex: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-center input {
+  width: 80%;
+  height: 40px;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 17px;
+  border: 2px solid #e3e3e3;
+  outline: none;
+}
+
+.nav-right {
+  flex: 2.5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 120px;
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.icon {
+  margin-right: 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 25px;
+  color: black;
+}
+
+.pink-icon {
+  width: 15px;
+  height: 15px;
+  background-color: #ff1c51;
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.nav-picture img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.user-options {
+  position: absolute;
+  transform: translate3d(0, 0, 0);
+  background-color: white;
+  padding: 15px;
+  padding-bottom: 25px;
+  margin-top: 15px;
+  right: 123px;
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+}
+
+.user-options:after {
+  content: " ";
+  position: absolute;
+  right: 10px;
+  top: -15px;
+  border-top: none;
+  border-right: 15px solid transparent;
+  border-left: 15px solid transparent;
+  border-bottom: 15px solid white;
+}
+
+.user-options .profile-option {
+  margin-bottom: 5px;
+  color: black;
+}
+
+.user-options p{
+  cursor: pointer;
+}
+
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.profile-wrapper i {
+  margin-right: 10px;
+  color: black;
+}
+
+.posting {
+	  margin: 0 auto;
+    width: 40%;
+    top: 10%;
+    right: 30%;
+	  max-height: 85%;
+	  text-align: center;
+	  background-color: white;
+    position: fixed;
+    z-index: 1005;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow-y: scroll;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: lightgray;
+  border-radius: 5px;
+}
