@@ -8,7 +8,6 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  margin-bottom: 20px;
 }
 
 .main-logo {
@@ -30,13 +29,11 @@
   justify-content: center;
 }
 
-.nav-center input {
+.search-users {
   width: 80%;
   height: 40px;
   border-radius: 5px;
-  padding-left: 10px;
   font-size: 17px;
-  border: 2px solid #e3e3e3;
   outline: none;
 }
 
@@ -158,4 +155,10 @@
 ::-webkit-scrollbar-thumb {
   background-color: lightgray;
   border-radius: 5px;
+}
+
+.search-react {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

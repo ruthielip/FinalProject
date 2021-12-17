@@ -1,16 +1,32 @@
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Share from '../share/Share';
+import Select from 'react-select';
+import axios from 'axios';
 
 const Navbar = () => {
   const {user} = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const navigate = useNavigate();
   const [display, setDisplay] = useState('none');
-  const [share, setShare] = useState('none')
+  const [share, setShare] = useState('none');
+  const [accounts, setAccounts] = useState([]);
+  const [users, setUsers] = useState([]);
+
+  useEffect(()=>{
+    const fetchUsers = async () => {
+      try{
+        const res = await axios.get('/users/all');
+        setAccounts(res.data);
+      } catch(err) {
+        console.log(err);
+      }
+    }
+    fetchUsers();
+  },[]);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -33,6 +49,18 @@ const Navbar = () => {
     }
   }
 
+  const usersArray = accounts.map(user=>(
+    { label: <div>
+             <Link to={`/profile/${user.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${user.username}`)}>
+             <div  className='search-react'>
+             <img src={PF + user.profilePicture} height="40px" width="40px" style={{borderRadius: '50%', marginRight: '10px'}}/>
+             <p>{user.username}</p>
+             </div>
+             </Link>
+             </div>,
+      value: user.username})
+  );
+
   return (
     <div className='navbar'>
       <div className='nav-left'>
@@ -42,7 +70,8 @@ const Navbar = () => {
       </div>
 
       <div className='nav-center'>
-         <input placeholder='Search..'/>
+         <Select placeholder='Search..' options={usersArray} className='search-users' control
+         components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null}}/>
       </div>
 
       <div className='nav-right'>

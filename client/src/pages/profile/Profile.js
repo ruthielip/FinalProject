@@ -17,12 +17,17 @@ const Profile = () => {
   const [friends, setFriends] = useState([]);
   const [followers, setFollowers] = useState([]);
   const {user: currentUser, dispatch} = useContext(AuthContext);
-  const [followed, setFollowed] = useState(currentUser.following.includes(user?._id));
+  const [isFollowing, setIsFollowing] = useState('');
   const username = useParams().username;
   const [profileFile, setProfileFile] = useState(null);
   const [coverFile, setCoverFile] = useState(null);
   const [profilePhoto, setProfilePhoto] = useState('');
   const [description, setDescription] = useState('');
+  const [followButton, setFollowButton] = useState('');
+
+  useEffect(()=>{
+    setIsFollowing(currentUser.following.includes(user?._id))
+  },[user])
 
   useEffect(()=>{
     const fetchUser = async () => {
@@ -49,13 +54,20 @@ const Profile = () => {
       try{
         const followersList = await axios.get(`/users/followers/${user._id}`)
         setFollowers(followersList.data);
-        console.log(followersList.data);
       }catch(err){
         console.log(err);
       }
     };
     getFollowers();
   }, [user])
+
+  useEffect(()=>{
+      if(isFollowing){
+        setFollowButton('unfollow-button')
+      } else {
+        setFollowButton('following-button')
+      }
+  },[isFollowing])
 
   const showFollowing = (e) => {
     e.preventDefault();
@@ -155,7 +167,7 @@ const Profile = () => {
 
   const handleClick = async () => {
     try {
-      if (followed) {
+      if (isFollowing) {
         await axios.put(`/users/${user._id}/unfollow`, {
           userId: currentUser._id,
         });
@@ -166,7 +178,7 @@ const Profile = () => {
         });
         dispatch({ type: "FOLLOW", payload: user._id });
       }
-      setFollowed(!followed);
+      setIsFollowing(!isFollowing);
     } catch (err) {
     }
   };
@@ -236,7 +248,7 @@ const Profile = () => {
          </div>
 
          <div className='numbers'>
-            <p onClick={showFollowers}><strong>3</strong> followers</p>
+            <p onClick={showFollowers}><strong>{followers.length}</strong> followers</p>
 
             <div className='popup-wrapper' style={{display: display2}}>
             <div className="popup" style={{display: display2}}>
@@ -244,6 +256,10 @@ const Profile = () => {
               <i className="fas fa-times exit" onClick={hideFollowers}></i>
               <h3>Followers</h3>
             </div>
+
+            {followers.length === 0 ?
+              <p className='zero-following'><strong>{user.username}</strong> has no followers</p> :
+              <>
               {followers.map((friend, i)=>(
                 <Link key={i} className='following-link' to={`/profile/${friend.username}`} onClick={() => window.location.href(`/profile/${friend.username}`)}>
                 <div className='following-container'>
@@ -254,14 +270,16 @@ const Profile = () => {
                      <p>{friend.desc}</p>
                    </div>
                 </div>
-                {/*<button>Following</button>*/}
                 </div>
                 </Link>
               ))}
+            </>
+            }
+
             </div>
             </div>
 
-            <p onClick={showFollowing}><strong>2</strong> following</p>
+            <p onClick={showFollowing}><strong>{friends.length}</strong> following</p>
 
             <div className='popup-wrapper' style={{display: display}}>
             <div className="popup" style={{display: display}}>
@@ -269,20 +287,25 @@ const Profile = () => {
               <i className="fas fa-times exit" onClick={hideFollowing}></i>
               <h3>Following</h3>
             </div>
-              {friends.map((friend, i)=>(
-                <Link key={i} className='following-link' to={`/profile/${friend.username}`} onClick={() => window.location.href(`/profile/${friend.username}`)}>
-                <div className='following-container'>
-                <div className='following'>
-                   <img src={friend.profilePicture ? PF + friend.profilePicture : PF + 'pp.png'} alt=''/>
-                   <div className='following-info'>
-                     <h4>{friend.username}</h4>
-                     <p>{friend.desc}</p>
-                   </div>
-                </div>
-                {/*<button>Following</button>*/}
-                </div>
-                </Link>
-              ))}
+
+              {friends.length === 0 ?
+                <p className='zero-following'><strong>{user.username}</strong> isn't following anyone</p> :
+                <>
+                {friends.map((friend, i)=>(
+                  <Link key={i} className='following-link' to={`/profile/${friend.username}`} onClick={() => window.location.href(`/profile/${friend.username}`)}>
+                  <div className='following-container'>
+                  <div className='following'>
+                     <img src={friend.profilePicture ? PF + friend.profilePicture : PF + 'pp.png'} alt=''/>
+                     <div className='following-info'>
+                       <h4>{friend.username}</h4>
+                       <p>{friend.desc}</p>
+                     </div>
+                  </div>
+                  </div>
+                  </Link>
+                ))}
+                </>
+              }
             </div>
             </div>
 
@@ -290,7 +313,7 @@ const Profile = () => {
 
          <div className='follow-button'>
             {user.username !== currentUser.username && (
-              <button onClick={handleClick}>{followed ? 'Unfollow' : 'Follow'}</button>
+              <button onClick={handleClick} className={followButton}>{isFollowing ? 'Unfollow' : 'Follow'}</button>
             )}
          </div>
 

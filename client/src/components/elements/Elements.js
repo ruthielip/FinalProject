@@ -13,8 +13,6 @@ const Elements = (props) => {
   const [zoom, setZoom] = useState('none');
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  // console.log(post);
-
   useEffect(()=>{
     const fetchUser = async () => {
       const res = await axios.get(`/users?userId=${post.userId}`);
@@ -49,7 +47,12 @@ const Elements = (props) => {
       <div className='popup-wrapper-elm' style={{display: zoom}}>
       <div className='popup-elm'>
       {posts.map((item, i)=>{
-        return (<> <Post key={i} post={item}/><i className="fas fa-times exit-elm" onClick={handleDisplay}></i></>)
+        return (
+          <div key={i}>
+            <Post post={item}/>
+            <i className="fas fa-times exit-elm" onClick={handleDisplay}></i>
+          </div>
+        )
       })}
       </div>
       </div>

@@ -200,6 +200,7 @@ const Post = (props) => {
                  </>
                  : <p className='post-desc'>{post?.desc}</p>
                }
+
                </div>
             </div>
          </div>
@@ -211,20 +212,22 @@ const Post = (props) => {
          <div className='comments-post' style={{display: viewComments}}>
            {post.comments.map((item, i)=>{
              return(
-               <>
+               <div  key={i} >
                <div className='comment-info'>
                   {
-                    accounts.map((account, i)=>{
+                    accounts.map((account, index)=>{
                       if(account._id === item.id){
                         return(
-                          <p className='comment-username'><strong>{account.username}</strong></p>
+                          <Link to={`/profile/${account.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${account.username}`)}>
+                          <p key={index} className='comment-username'><strong>{account.username}</strong></p>
+                          </Link>
                         )
                       }
                     })
                   }
                   <p className='posted-comment'>{item.text}</p>
                </div>
-               </>
+               </div>
              )
            })}
          </div>
