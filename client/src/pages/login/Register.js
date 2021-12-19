@@ -35,19 +35,21 @@ const Register = () => {
   }
 
   return (
-    <div className='main'>
+    <div className='bg'>
+      <div className='main'>
        <form className='wrapper' onSubmit={handleClick}>
-          <h3>FinalProject</h3>
+          <h3 className='login-title'>FinalProject</h3>
           <input placeholder='Username' required ref={username}/>
           <input type='email' placeholder='Email' required ref={email}/>
           <input type='password' placeholder='Password' minLength='6' required ref={password}/>
           <input type='password' placeholder='Confirm password' minLength='6' required ref={confirmPassword}/>
           <button type='submit' className='button'>{isFetching ? <CircularProgress color="inherit" size='25px'/> : 'Sign In'}</button>
-          <p>Already have an account?</p>
+          <p className='login-p'>Already have an account?</p>
           <Link to='/login'>
              <p>Log in</p>
           </Link>
        </form>
+      </div>
     </div>
   )
 }

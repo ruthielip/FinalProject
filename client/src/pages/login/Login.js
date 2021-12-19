@@ -16,17 +16,19 @@ const Login = () => {
   }
 
   return (
-    <div className='main'>
-       <form className='wrapper' onSubmit={handleClick}>
-          <h3>FinalProject</h3>
-          <input type='email' required placeholder='Email' ref={email}/>
-          <input type='password' minLength='6' placeholder='Password' ref={password}/>
-          <button type='submit' className='button'>{isFetching ? <CircularProgress color="inherit" size='25px'/> : 'Log In'}</button>
-          <p>Don't have an account?</p>
-          <Link to='/register'>
-             <p>Sign up</p>
-          </Link>
-       </form>
+    <div className='bg'>
+       <div className='main'>
+          <form className='wrapper' onSubmit={handleClick}>
+             <h3 className='login-title'>FinalProject</h3>
+             <input type='email' required placeholder='Email' ref={email}/>
+             <input type='password' minLength='6' placeholder='Password' ref={password}/>
+             <button type='submit' className='button'>{isFetching ? <CircularProgress color="inherit" size='25px'/> : 'Log In'}</button>
+             <p className='login-p'>Don't have an account?</p>
+             <Link to='/register'>
+                <p>Sign up</p>
+             </Link>
+          </form>
+       </div>
     </div>
   )
 }

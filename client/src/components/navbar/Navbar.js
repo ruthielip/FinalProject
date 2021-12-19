@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Share from '../share/Share';
 import Select from 'react-select';
 import axios from 'axios';
+import Messenger from '../../pages/messenger/Messenger';
 
 const Navbar = () => {
   const {user} = useContext(AuthContext);
@@ -61,6 +62,17 @@ const Navbar = () => {
       value: user.username})
   );
 
+  const style = {
+  control: base => ({
+    ...base,
+    border: '1px solid lightgray',
+    boxShadow: 'none',
+    '&:hover': {
+        border: '1px solid lightgray',
+    }
+  })
+};
+
   return (
     <div className='navbar'>
       <div className='nav-left'>
@@ -71,7 +83,7 @@ const Navbar = () => {
 
       <div className='nav-center'>
          <Select placeholder='Search..' options={usersArray} className='search-users' control
-         components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null}}/>
+         components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null}} styles={style}/>
       </div>
 
       <div className='nav-right'>
@@ -82,17 +94,10 @@ const Navbar = () => {
               <i className="fas fa-home" style={{color: 'black'}}></i>
            </Link>
            </div>
+
            <div className='icon'>
-              <i className="far fa-user"></i>
-              {/*<span className='pink-icon'>1</span>*/}
-           </div>
-           <div className='icon'>
-              <i className="far fa-comment-dots"></i>
+              <Link to='/messenger'><i className="far fa-comment-dots" style={{color: 'black'}}></i></Link>
               {/*<span className='pink-icon'>2</span>*/}
-           </div>
-           <div className='icon'>
-              <i className="far fa-heart"></i>
-              {/*<span className='pink-icon'>5</span>*/}
            </div>
 
            <div className='icon'>

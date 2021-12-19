@@ -49,7 +49,7 @@ const Elements = (props) => {
       {posts.map((item, i)=>{
         return (
           <div key={i}>
-            <Post post={item}/>
+            <Post post={item} />
             <i className="fas fa-times exit-elm" onClick={handleDisplay}></i>
           </div>
         )

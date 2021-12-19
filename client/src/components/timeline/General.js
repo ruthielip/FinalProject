@@ -3,7 +3,7 @@ import axios from 'axios';
 import Post from '../post/Post';
 import './Timeline.css';
 
-const General = () => {
+const General = ({socket, socketUser}) => {
   const [allPosts, setAllPosts] = useState([]);
 
   useEffect(()=>{
@@ -24,7 +24,7 @@ const General = () => {
     <>
     <div className='wrapper-timeline'>
        {allPosts.map((item, i)=>{
-         return <Post key={i} post={item}/>
+         return <Post socket={socket} socketUser={socketUser} key={i} post={item}/>
        })}
     </div>
     </>

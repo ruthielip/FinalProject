@@ -24,6 +24,7 @@ const Profile = () => {
   const [profilePhoto, setProfilePhoto] = useState('');
   const [description, setDescription] = useState('');
   const [followButton, setFollowButton] = useState('');
+  const [conversations, setConversations] = useState([]);
 
   useEffect(()=>{
     setIsFollowing(currentUser.following.includes(user?._id))
@@ -68,6 +69,21 @@ const Profile = () => {
         setFollowButton('following-button')
       }
   },[isFollowing])
+
+  useEffect(()=>{
+    const getConversations = async ()=>{
+      try {
+        const res = await axios.get(`/conversations/${user._id}`);
+        setConversations(res.data);
+      } catch(err) {
+        console.log(err);
+      }
+    };
+    getConversations();
+  }, [user]);
+
+  console.log(conversations.length === 0);
+  console.log(conversations);
 
   const showFollowing = (e) => {
     e.preventDefault();
@@ -163,6 +179,17 @@ const Profile = () => {
     } catch(err) {
       console.log(err);
     }
+  }
+
+  const newConvo = async () =>{
+    const newConversation = {
+      members: [currentUser._id, user._id]
+    }
+     try{
+       await axios.post('/conversations', newConversation)
+     }catch(err){
+       console.log(err);
+     }
   }
 
   const handleClick = async () => {
@@ -315,10 +342,16 @@ const Profile = () => {
             {user.username !== currentUser.username && (
               <button onClick={handleClick} className={followButton}>{isFollowing ? 'Unfollow' : 'Follow'}</button>
             )}
+            <Link to='/messenger'>
+            {
+              user.username !== currentUser.username && conversations.length === 0 ?
+              <button className='message-button' onClick={newConvo}>Message</button> :
+              user.username !== currentUser.username && (
+                <button className='message-button'>Message</button>
+              )
+            }
+            </Link>
          </div>
-
-
-        {/*  <Timeline username={username}/> */}
 
       </div>
     </div>

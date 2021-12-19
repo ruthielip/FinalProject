@@ -2,8 +2,18 @@
   box-sizing: border-box;
 }
 
+.bg{
+  background-image: url('bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+
 .main {
-  margin: 100px 35%;
+  margin: 0px 35%;
+  padding-top: 120px;
 }
 
 .wrapper {
@@ -11,18 +21,18 @@
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 5px;
 }
 
-.wrapper h3 {
+.login-title {
   margin: 20px;
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 400;
+  color: white;
 }
 
 .wrapper input {
-  width: 70%;
+  width: 300px;
   height: 50px;
   margin-bottom: 10px;
   font-size: 18px;
@@ -32,31 +42,27 @@
 
 .button {
   text-align: center;
-  background-color: white;
-  border: 1px solid black;
+  background-color: #7aa6bf;
+  border: none;
   cursor: pointer;
   margin: 5px;
-  width: 70%;
+  width: 300px;
   height: 50px;
-  border-radius: 0;
-  color: black;
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.button:hover {
-  background-color: black;
+  border-radius: 2px;
   color: white;
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.wrapper p {
-  margin-top: 10px;
+.login-p {
+  margin: 10px 0;
   font-size: 18px;
+  color: white;
 }
 
 .wrapper a {
   margin-bottom: 20px;
   text-decoration: none;
-  color: #1c99ff;
+  color: #80ffc4;
   font-size: 18px;
 }

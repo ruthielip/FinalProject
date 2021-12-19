@@ -19,11 +19,11 @@
 }
 
 .nav-left {
-  flex: 3;
+  flex: 2;
 }
 
 .nav-center {
-  flex: 5;
+  flex: 8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,7 +38,7 @@
 }
 
 .nav-right {
-  flex: 2.5;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -161,4 +161,45 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.notifs {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background-color: white;
+  color: black;
+  font-weight: 300;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-right: 218px;
+  border-radius: 5px;
+}
+
+.notifs:after {
+    content: " ";
+    position: absolute;
+    right: 10px;
+    top: -15px;
+    border-top: none;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid white;
+}
+
+.notif {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.notifButton {
+  float: right;
+  margin-top: 5px;
+  background-color: black;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding:5px 10px;
+  cursor: pointer;
+  font-weight: 500;
 }

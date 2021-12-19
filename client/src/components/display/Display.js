@@ -37,7 +37,6 @@ const Display = (props) => {
        posts.length === 0 ?
         <h4 className='no-posts'>-{friend.username} has no posts-</h4> :
         <div className='wrapper-timeline'>
-        {/* !username && <Share/> */}
         <div className='images-display'>
            {posts.map((item, i)=>{
              return (

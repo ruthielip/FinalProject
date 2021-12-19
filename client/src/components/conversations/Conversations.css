@@ -1,0 +1,23 @@
+.conversations {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.conversations:hover {
+  background-color: #ededed;
+}
+
+.convo-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.convo-name {
+  font-weight: 500;
+}

@@ -7,6 +7,8 @@ const multer = require('multer');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const conversationRoute = require('./routes/conversations');
+const messageRoute = require('./routes/messages');
 const path = require('path');
 
 const app = exp();
@@ -43,6 +45,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/posts', postRoute);
+app.use('/api/conversations', conversationRoute);
+app.use('/api/messages', messageRoute);
 
 app.listen(process.env.PORT, ()=>{
   console.log(`listening on port ${process.env.PORT}`)

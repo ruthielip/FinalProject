@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const Post = (props) => {
-  const { post } = props;
+  const { post, socket, socketUser } = props;
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [display, setDisplay] = useState('none')
@@ -53,14 +53,21 @@ const Post = (props) => {
     }
   }
 
-  const likeHandler = () => {
+  const likeHandler = (type) => {
     try {
       axios.put(`/posts/${post._id}/like`, {userId: currentUser._id})
     } catch(err) {
       console.log(err)
     }
     setLike(isLiked ? like - 1 : like + 1)
-    setIsLiked(!isLiked)
+    setIsLiked(!isLiked);
+
+    if(!isLiked){
+      socket?.emit('sendNotification', {
+        senderId: currentUser._id,
+        receiverId: post.userId
+      })
+    }
   }
 
   const handleDelete = async () => {
