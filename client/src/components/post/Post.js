@@ -17,8 +17,26 @@ const Post = (props) => {
   const [description, setDescription] = useState('');
   const [comment, setComment] = useState('')
   const [viewComments, setViewComments] = useState('none');
+  const [likesDisplay, setLikesDisplay] = useState('none');
+  const [postLikes, setPostLikes] = useState([]);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const {user: currentUser} = useContext(AuthContext);
+
+  const commentArray = post.comments.map((comment)=>{
+    return comment._id
+  })
+
+  useEffect(()=>{
+    const getLikes = async ()=>{
+      try{
+        const likesArray = await axios.get(`/posts/likes/${post._id}`)
+        setPostLikes(likesArray.data);
+      }catch(err){
+        console.log(err);
+      }
+    };
+    getLikes();
+  }, [post])
 
   useEffect(()=>{
     const fetchUsers = async () => {
@@ -62,14 +80,14 @@ const Post = (props) => {
     setIsLiked(!isLiked);
   }
 
-  // const deleteComment = async () => {
-  //   try{
-  //     post.comments.map(comment=>console.log(comment._id))
-  //     axios.delete(`/posts/${post._id}/comment`, {comments: {commentId: post.comments._id}})
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // }
+  const deleteComment = async (e) => {
+    try{
+      await axios.put(`/posts/${post._id}/comments`, {commentId: e.target.value});
+      window.location.reload();
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   const handleDelete = async () => {
     try {
@@ -102,7 +120,7 @@ const Post = (props) => {
     newComment.text = comment;
     try {
       await axios.put(`/posts/${post._id}/comment`, newComment);
-      window.location.reload();
+      window.location.href = window.location.href;
     } catch (err) {
       console.log(err);
     }
@@ -187,7 +205,36 @@ const Post = (props) => {
 
                <div className='likes'>
                {isLiked ? <i className="fas fa-heart" onClick={likeHandler}></i> : <i className="far fa-heart" onClick={likeHandler}></i>}
-                  <span className='counter'> <strong>{like}</strong> likes</span>
+                  <span className='counter' onClick={()=>setLikesDisplay('block')}> <strong>{like}</strong> likes</span>
+               </div>
+
+               <div className='popup-wrapper-likes' style={{display: likesDisplay}}>
+                 <div className="popup-likes">
+                   <div className='likes-header'>
+                     <i className="fas fa-times exit" onClick={()=>setLikesDisplay('none')}></i>
+                     <h3 className='likes-header'>Likes</h3>
+                   </div>
+
+                   {like === 0 ?
+                    <p className='no-likes'>No likes</p> :
+                    <>
+                    {postLikes.map((liker, i)=>(
+                      <Link key={i} className='following-link' to={`/profile/${liker.username}`} onClick={() => window.location.href(`/profile/${liker.username}`)}>
+                       <div className='following-container'>
+                      <div className='following'>
+                      <img src={liker.profilePicture ? PF + liker.profilePicture : PF + 'pp.png'}/>
+                      <div className='following-info'>
+                        <h4>{liker.username}</h4>
+                        <p>{liker.desc}</p>
+                      </div>
+                      </div>
+                      </div>
+                      </Link>
+                    ))}
+                    </>
+                   }
+
+                 </div>
                </div>
 
                <div className='caption'>
@@ -214,7 +261,10 @@ const Post = (props) => {
          </div>
 
          <div className='view-comments'>
-           <p className='click-view' onClick={handleCommentView}>{viewComments === 'none' ? 'View Comments' : 'Hide Comments'}</p>
+        { post.comments.length === 0 ?
+          <p className='no-view'>No Comments</p> :
+          <p className='click-view' onClick={handleCommentView}>{viewComments === 'none' ? 'View Comments' : 'Hide Comments'}</p>
+        }
          </div>
 
          <div className='comments-post' style={{display: viewComments}}>
@@ -222,6 +272,7 @@ const Post = (props) => {
              return(
                <div  key={i} >
                 <div className='comment-info'>
+                <div className='comment-info-left'>
                   {
                     accounts.map((account, index)=>{
                       if(account._id === item.id){
@@ -230,12 +281,21 @@ const Post = (props) => {
                           <Link to={`/profile/${account.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${account.username}`)}>
                           <p className='comment-username'><strong>{account.username}</strong></p>
                           </Link>
+
                           </div>
+
                         )
                       }
                     })
                   }
                   <p className='posted-comment'>{item.text}</p>
+                  </div>
+                  <div className='comment-info-right'>
+                  {
+                    item.id === currentUser._id ?
+                    <button className='del-btn' onClick={deleteComment} value={item._id}>X</button> : null
+                  }
+                </div>
                 </div>
                </div>
              )

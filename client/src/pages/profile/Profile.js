@@ -349,7 +349,7 @@ const Profile = () => {
             }
             {
               user.username !== currentUser.username &&mutualConversations.length === 0 ?
-              <button className='message-button' onClick={newConvo}>New Message</button> : null
+              <button className='message-button' onClick={newConvo}>Message</button> : null
             }
             </Link>
          </div>

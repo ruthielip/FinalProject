@@ -49,6 +49,25 @@ router.delete('/:id', async (req, res)=>{
   }
 });
 
+router.get('/likes/:id', async (req, res)=>{
+  try{
+     const post = await Post.findById(req.params.id);
+     const likes = await Promise.all(
+       post.likes.map((postId)=>{
+         return User.findById(postId)
+       })
+     );
+     let likesArray = [];
+     likes.map((like)=>{
+       const {_id, username, profilePicture, desc} = like;
+       likesArray.push({_id, username, profilePicture, desc})
+     })
+     res.status(200).json(likesArray)
+  } catch(err) {
+    res.status(500).json(err)
+  }
+})
+
 router.put('/:id/like', async (req, res)=>{
   try{
     const post = await Post.findById(req.params.id);
@@ -78,7 +97,7 @@ router.put('/:id/comment', async (req, res)=>{
   }
 });
 
-router.delete('/:id/comment', async (req, res)=>{
+router.put('/:id/comments', async (req, res)=>{
   try{
     const post = await Post.findById(req.params.id);
     await post.updateOne({$pull: {comments:{
