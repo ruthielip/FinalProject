@@ -11,7 +11,6 @@ router.get('/all', async(req, res)=>{
   }
 })
 
-
 router.post('/', async (req, res)=>{
   const newPost = new Post(req.body);
   try{
@@ -78,6 +77,18 @@ router.put('/:id/comment', async (req, res)=>{
     res.status(500).json(err)
   }
 });
+
+router.delete('/:id/comment', async (req, res)=>{
+  try{
+    const post = await Post.findById(req.params.id);
+    await post.updateOne({$pull: {comments:{
+      _id: req.body.commentId
+    }}});
+    res.status(200).json('comment deleted')
+  } catch(err) {
+    res.status(500).json(err);
+  }
+})
 
 router.get('/:id', async (req, res)=>{
   try {

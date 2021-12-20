@@ -1,12 +1,12 @@
 import './Message.css';
 import { format } from 'timeago.js';
-import { AuthContext } from '../../context/AuthContext';
-import { useContext, useEffect, useState } from 'react';
+// import { AuthContext } from '../../context/AuthContext';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 const Message = ( {message, own }) => {
-  const {user} = useContext(AuthContext);
+  // const {user} = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [accounts, setAccounts] = useState([]);
 

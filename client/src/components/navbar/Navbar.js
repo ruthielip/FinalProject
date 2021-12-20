@@ -2,20 +2,16 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Share from '../share/Share';
 import Select from 'react-select';
 import axios from 'axios';
-import Messenger from '../../pages/messenger/Messenger';
 
 const Navbar = () => {
   const {user} = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-  const navigate = useNavigate();
   const [display, setDisplay] = useState('none');
   const [share, setShare] = useState('none');
   const [accounts, setAccounts] = useState([]);
-  const [users, setUsers] = useState([]);
 
   useEffect(()=>{
     const fetchUsers = async () => {
@@ -54,7 +50,7 @@ const Navbar = () => {
     { label: <div>
              <Link to={`/profile/${user.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${user.username}`)}>
              <div  className='search-react'>
-             <img src={PF + user.profilePicture} height="40px" width="40px" style={{borderRadius: '50%', marginRight: '10px'}}/>
+             <img src={PF + user.profilePicture} height="40px" width="40px" style={{borderRadius: '50%', marginRight: '10px'}} alt=''/>
              <p>{user.username}</p>
              </div>
              </Link>

@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import './Timeline.css'
-import Share from '../share/Share';
+import './Timeline.css';
 import Post from '../post/Post';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
@@ -9,7 +8,7 @@ import General from './General';
 const Timeline = (props) => {
   const {username} = props;
   const [posts, setPosts] = useState([]);
-  const [allPosts, setAllPosts] = useState([])
+  const [allPosts, setAllPosts] = useState([]);
   const {user} = useContext(AuthContext);
   const [friend, setFriend] = useState({});
   const [followingDisplay, setFollowingDisplay] = useState('none');
@@ -39,13 +38,14 @@ const Timeline = (props) => {
     fetchAllPosts();
   },[]);
 
-  useEffect(()=>{
-    const fetchUser = async () => {
-      const res = await axios.get(`/users?username=${username}`);
-      setFriend(res.data)
-    }
-    fetchUser()
-  }, [username]);
+  // useEffect(()=>{
+  //   const fetchUser = async () => {
+  //     const res = await axios.get(`/users?username=${username}`);
+  //     setFriend(res.data)
+  //   }
+  //   fetchUser()
+  // }, [username]);
+
 
   const showGeneral = () => {
     setFollowingDisplay('none')

@@ -17,7 +17,6 @@ const Conversations = ({conversation, currentUser}) => {
         console.log(err);
       }
     }
-    console.log(conversation);
     getUser();
   },[currentUser, conversation]);
 

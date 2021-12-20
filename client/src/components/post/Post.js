@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const Post = (props) => {
-  const { post, socket, socketUser } = props;
+  const { post } = props;
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [display, setDisplay] = useState('none')
   const [showImg, setShowImg] = useState('none')
   const [user, setUser] = useState({});
-  const [name, setName] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [description, setDescription] = useState('');
@@ -61,14 +60,16 @@ const Post = (props) => {
     }
     setLike(isLiked ? like - 1 : like + 1)
     setIsLiked(!isLiked);
-
-    if(!isLiked){
-      socket?.emit('sendNotification', {
-        senderId: currentUser._id,
-        receiverId: post.userId
-      })
-    }
   }
+
+  // const deleteComment = async () => {
+  //   try{
+  //     post.comments.map(comment=>console.log(comment._id))
+  //     axios.delete(`/posts/${post._id}/comment`, {comments: {commentId: post.comments._id}})
+  //   } catch(err) {
+  //     console.log(err);
+  //   }
+  // }
 
   const handleDelete = async () => {
     try {
@@ -220,20 +221,22 @@ const Post = (props) => {
            {post.comments.map((item, i)=>{
              return(
                <div  key={i} >
-               <div className='comment-info'>
+                <div className='comment-info'>
                   {
                     accounts.map((account, index)=>{
                       if(account._id === item.id){
                         return(
+                          <div key={index}>
                           <Link to={`/profile/${account.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${account.username}`)}>
-                          <p key={index} className='comment-username'><strong>{account.username}</strong></p>
+                          <p className='comment-username'><strong>{account.username}</strong></p>
                           </Link>
+                          </div>
                         )
                       }
                     })
                   }
                   <p className='posted-comment'>{item.text}</p>
-               </div>
+                </div>
                </div>
              )
            })}

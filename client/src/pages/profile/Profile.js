@@ -1,6 +1,5 @@
 import './Profile.css';
 import Navbar from '../../components/navbar/Navbar';
-import Timeline from '../../components/timeline/Timeline';
 import Display from '../../components/display/Display';
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
@@ -21,14 +20,14 @@ const Profile = () => {
   const username = useParams().username;
   const [profileFile, setProfileFile] = useState(null);
   const [coverFile, setCoverFile] = useState(null);
-  const [profilePhoto, setProfilePhoto] = useState('');
   const [description, setDescription] = useState('');
   const [followButton, setFollowButton] = useState('');
   const [conversations, setConversations] = useState([]);
+  const [mutualConversations, setMutualConversations] = useState([]);
 
   useEffect(()=>{
     setIsFollowing(currentUser.following.includes(user?._id))
-  },[user])
+  },[user, currentUser])
 
   useEffect(()=>{
     const fetchUser = async () => {
@@ -82,8 +81,9 @@ const Profile = () => {
     getConversations();
   }, [user]);
 
-  console.log(conversations.length === 0);
-  console.log(conversations);
+  useEffect(()=>{
+    setMutualConversations(conversations.filter((c)=>c.members.includes('61b76dc38be9870bbdbdca39')))
+  },[conversations])
 
   const showFollowing = (e) => {
     e.preventDefault();
@@ -289,15 +289,15 @@ const Profile = () => {
               <>
               {followers.map((friend, i)=>(
                 <Link key={i} className='following-link' to={`/profile/${friend.username}`} onClick={() => window.location.href(`/profile/${friend.username}`)}>
-                <div className='following-container'>
-                <div className='following'>
+                 <div className='following-container'>
+                  <div className='following'>
                    <img src={friend.profilePicture ? PF + friend.profilePicture : PF + 'pp.png'} alt=''/>
                    <div className='following-info'>
                      <h4>{friend.username}</h4>
                      <p>{friend.desc}</p>
                    </div>
-                </div>
-                </div>
+                  </div>
+                 </div>
                 </Link>
               ))}
             </>
@@ -344,11 +344,12 @@ const Profile = () => {
             )}
             <Link to='/messenger'>
             {
-              user.username !== currentUser.username && conversations.length === 0 ?
-              <button className='message-button' onClick={newConvo}>Message</button> :
-              user.username !== currentUser.username && (
-                <button className='message-button'>Message</button>
-              )
+              user.username !== currentUser.username &&mutualConversations.length > 0 ?
+              <button className='message-button'>Message</button> : null
+            }
+            {
+              user.username !== currentUser.username &&mutualConversations.length === 0 ?
+              <button className='message-button' onClick={newConvo}>New Message</button> : null
             }
             </Link>
          </div>

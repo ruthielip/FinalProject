@@ -66,3 +66,11 @@
   color: #80ffc4;
   font-size: 18px;
 }
+
+.wrong-info {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 2px;
+}

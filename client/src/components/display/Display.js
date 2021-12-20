@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import './Display.css';
-import Post from '../post/Post';
 import Elements from '../elements/Elements';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';

@@ -1,15 +1,15 @@
 import './Elements.css';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../../context/AuthContext';
+// import { AuthContext } from '../../context/AuthContext';
 import Post from '../post/Post';
 
 const Elements = (props) => {
   const { post } = props;
   const [user, setUser] = useState({});
-  const {user: currentUser} = useContext(AuthContext);
-  const [photo, setPhoto] = useState('none');
-  const [posts, setPosts] = useState([post]);
+  // const {user: currentUser} = useContext(AuthContext);
+  // const [photo, setPhoto] = useState('none');
+  const [posts] = useState([post]);
   const [zoom, setZoom] = useState('none');
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

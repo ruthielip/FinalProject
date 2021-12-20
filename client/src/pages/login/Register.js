@@ -13,7 +13,7 @@ const Register = () => {
   const confirmPassword = useRef();
   const username = useRef();
   const navigate = useNavigate();
-  const {isFetching, error, dispatch } = useContext(AuthContext);
+  const {isFetching } = useContext(AuthContext);
 
   const handleClick = async (e) => {
     e.preventDefault();

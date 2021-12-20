@@ -88,8 +88,6 @@ const Messenger = () => {
     }
   };
 
-  console.log(messages);
-
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
