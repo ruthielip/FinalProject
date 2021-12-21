@@ -25,6 +25,8 @@ const Profile = () => {
   const [conversations, setConversations] = useState([]);
   const [mutualConversations, setMutualConversations] = useState([]);
 
+  console.log(mutualConversations);
+
   useEffect(()=>{
     setIsFollowing(currentUser.following.includes(user?._id))
   },[user, currentUser])
@@ -262,7 +264,7 @@ const Profile = () => {
               user._id === currentUser._id &&
               <>
                 <i className="fas fa-edit edit-bio"></i>
-                <p onClick={showDesc}> Edit Bio</p>
+                <p className='edit-bio-txt' onClick={showDesc}> Edit Bio</p>
               </>
             }
             </div>
@@ -349,10 +351,16 @@ const Profile = () => {
             }
             {
               user.username !== currentUser.username &&mutualConversations.length === 0 ?
-              <button className='message-button' onClick={newConvo}>Message</button> : null
+              <button className='message-button' onClick={newConvo}>New Message</button> : null
             }
             </Link>
-         </div>
+
+            {/*<div className='first-msg'>
+                          <h3>Message</h3>
+                          <textarea></textarea><br/>
+                          <button>Send</button>
+                        </div>
+                     </div>*/}
 
       </div>
     </div>

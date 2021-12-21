@@ -11,27 +11,17 @@ const Login = () => {
   const password = useRef();
   const navigate = useNavigate();
   const [wrongInfo, setWrongInfo] = useState('none');
-  const [accounts, setAccounts] = useState([]);
-  const {isFetching, dispatch, error} = useContext(AuthContext);
+  const {isFetching, dispatch, error, user} = useContext(AuthContext);
 
-  useEffect(()=>{
-    const fetchUsers = async () => {
-      try{
-        const res = await axios.get('/users/all');
-        setAccounts(res.data);
-      } catch(err) {
-        console.log(err);
-      }
-    }
-    fetchUsers();
-  },[]);
-
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    loginCall({email: email.current.value, password: password.current.value}, dispatch)
+    try {
+      await loginCall({email: email.current.value, password: password.current.value}, dispatch);
+    } catch(err) {
+      console.log(err);
+    }
+    setWrongInfo('block')
   }
-
-console.log();
 
   return (
     <div className='bg'>

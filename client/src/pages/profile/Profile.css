@@ -251,6 +251,11 @@
 
 .edit-bio {
   margin: 5px 2px;
+  color: gray;
+}
+
+.edit-bio-txt {
+  color: gray;
 }
 
 .edit-desc {

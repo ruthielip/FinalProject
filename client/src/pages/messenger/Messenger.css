@@ -2,6 +2,7 @@
   height: calc(100vh - 70px);
   display: flex;
   margin: 10px 300px;
+  /* border: 1px solid gray; */
 }
 
 .chat-menu {
@@ -16,6 +17,14 @@
   height: 100%;
 }
 
+.chat-menu-wrapper{
+  /* border-right: 1px solid gray; */
+  padding-right: 10px;
+  height: 76%;
+  overflow-y: scroll;
+
+}
+
 .chat-box-bottom {
   margin-top: 5px;
   display: flex;
@@ -26,14 +35,15 @@
 .chat-box-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   position: relative;
+  height: 90%;
 }
 
 .chat-box-top {
   height: 80%;
   overflow-y: scroll;
-  padding-right: 10px;
+  padding: 0 15px;
 }
 
 .chat-textarea {
