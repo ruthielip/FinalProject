@@ -16,6 +16,11 @@
   padding-top: 100px;
 }
 
+.main-reg {
+  margin: 0px 35%;
+  padding-top: 50px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

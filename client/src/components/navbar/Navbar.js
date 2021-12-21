@@ -73,7 +73,7 @@ const Navbar = () => {
     <div className='navbar'>
       <div className='nav-left'>
       <Link to='/' className='main-logo'>
-         <span>FinalProject</span>
+         <span>Artistree</span>
       </Link>
       </div>
 

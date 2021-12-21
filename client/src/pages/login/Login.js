@@ -27,7 +27,7 @@ const Login = () => {
     <div className='bg'>
        <div className='main'>
           <form className='wrapper' onSubmit={handleClick}>
-             <h3 className='login-title'>FinalProject</h3>
+             <h3 className='login-title'>Artistree</h3>
              <p className='wrong-info' style={{display: wrongInfo}}>Wrong Email or Password</p>
              <input type='email' required placeholder='Email' ref={email}/>
              <input type='password' minLength='6' placeholder='Password' ref={password}/>

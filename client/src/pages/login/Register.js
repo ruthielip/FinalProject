@@ -36,9 +36,9 @@ const Register = () => {
 
   return (
     <div className='bg'>
-      <div className='main'>
+      <div className='main-reg'>
        <form className='wrapper' onSubmit={handleClick}>
-          <h3 className='login-title'>FinalProject</h3>
+          <h3 className='login-title'>Artistree</h3>
           <input placeholder='Username' required ref={username}/>
           <input type='email' placeholder='Email' required ref={email}/>
           <input type='password' placeholder='Password' minLength='6' required ref={password}/>
