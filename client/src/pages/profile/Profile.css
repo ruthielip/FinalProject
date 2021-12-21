@@ -84,9 +84,12 @@
 }
 
 .numbers p {
-  margin-left: 10px;
   font-size: 18px;
   cursor: pointer;
+}
+
+.numbers-followers {
+  margin-right: 10px;
 }
 
 .follow-button button {

@@ -6,11 +6,11 @@
 }
 
 .chat-menu {
-  flex: 3;
+  flex: 3.5;
 }
 
 .chat-box {
-  flex: 9;
+  flex: 8.5;
 }
 
 .chat-menu-wrapper, .chat-box-wrapper {

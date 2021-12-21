@@ -27,8 +27,8 @@ const Message = ( {message, own }) => {
       {accounts.map((acc, i)=>{
           if(acc._id === message.sender){
             return(
-              <Link to={`../profile/${acc.username}`}>
-              <img key={i} className='message-img' src={acc.profilePicture ? PF + acc.profilePicture : PF + 'pp.png'} alt=''/>
+              <Link key={i}  to={`../profile/${acc.username}`}>
+              <img className='message-img' src={acc.profilePicture ? PF + acc.profilePicture : PF + 'pp.png'} alt=''/>
               </Link>
             )}
         })}

@@ -14,6 +14,17 @@ router.post('/messages', async (req, res)=>{
   }
 })
 
+router.delete('/:conversationId', async (req, res)=>{
+  try{
+    const conversation = await Conversation.findById(req.params.conversationId);
+    await conversation.deleteOne()
+    res.status(200).json('The conversation has been deleted')
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+  }
+})
+
 router.post('/', async (req, res)=>{
   const conversation = new Conversation(req.body);
   try{
@@ -23,17 +34,6 @@ router.post('/', async (req, res)=>{
     res.status(500).json(err)
   }
 })
-
-
-router.post('/', async (req, res)=>{
-  const newPost = new Post(req.body);
-  try{
-    const savedPost = await newPost.save();
-    res.status(200).json(savedPost)
-  }catch(err){
-    res.status(500).json(err)
-  }
-});
 
 router.get('/:userId', async (req, res)=>{
   try {

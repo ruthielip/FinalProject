@@ -80,9 +80,11 @@ const Timeline = (props) => {
        posts.length === 0 ?
         <h4 className='no-posts-timeline'>-No posts-</h4> :
         <div className='wrapper-timeline' style={{display: followingDisplay}}>
+          <div className='timeline-following'>
            {posts.map((item, i)=>{
              return <Post key={i} post={item}/>
            })}
+          </div>
         </div>
      }
 

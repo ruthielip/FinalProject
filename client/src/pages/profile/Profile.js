@@ -25,8 +25,6 @@ const Profile = () => {
   const [conversations, setConversations] = useState([]);
   const [mutualConversations, setMutualConversations] = useState([]);
 
-  console.log(mutualConversations);
-
   useEffect(()=>{
     setIsFollowing(currentUser.following.includes(user?._id))
   },[user, currentUser])
@@ -84,7 +82,7 @@ const Profile = () => {
   }, [user]);
 
   useEffect(()=>{
-    setMutualConversations(conversations.filter((c)=>c.members.includes('61b76dc38be9870bbdbdca39')))
+    setMutualConversations(conversations.filter((c)=>c.members.includes(currentUser._id)))
   },[conversations])
 
   const showFollowing = (e) => {
@@ -277,7 +275,7 @@ const Profile = () => {
          </div>
 
          <div className='numbers'>
-            <p onClick={showFollowers}><strong>{followers.length}</strong> followers</p>
+            <p className='numbers-followers' onClick={showFollowers}><strong>{followers.length}</strong> followers</p>
 
             <div className='popup-wrapper' style={{display: display2}}>
             <div className="popup" style={{display: display2}}>
@@ -354,13 +352,7 @@ const Profile = () => {
               <button className='message-button' onClick={newConvo}>New Message</button> : null
             }
             </Link>
-
-            {/*<div className='first-msg'>
-                          <h3>Message</h3>
-                          <textarea></textarea><br/>
-                          <button>Send</button>
-                        </div>
-                     </div>*/}
+         </div>
 
       </div>
     </div>

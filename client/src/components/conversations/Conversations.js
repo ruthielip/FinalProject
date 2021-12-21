@@ -2,8 +2,9 @@ import './Conversations.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Conversations = ({conversation, currentUser}) => {
+const Conversations = ({conversation, currentUser, deleteConversation}) => {
   const [user, setUser] = useState([]);
+  const [display, setDisplay] = useState('none')
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
   useEffect(()=>{
@@ -22,8 +23,24 @@ const Conversations = ({conversation, currentUser}) => {
 
   return (
     <div className='conversations'>
-      <img className='convo-img' src={user?.profilePicture ? PF + user.profilePicture : PF + 'pp.png'} alt=''/>
-      <p className='convo-name'>{user?.username}</p>
+      <div className='conversations-left'>
+        <img className='convo-img' src={user?.profilePicture ? PF + user.profilePicture : PF + 'pp.png'} alt=''/>
+        <p className='convo-name'>{user?.username}</p>
+      </div>
+      <div className='conversations-right'>
+        <button className='convo-dlt-btn' onClick={()=>setDisplay('block')}>Delete</button>
+      </div>
+
+      <div className='popup-wrapper-convo' style={{display: display}}>
+        <div className="popup-convo">
+          <div className='likes-header'>
+            <i className="fas fa-times exit" onClick={()=>setDisplay('none')}></i>
+            <p>Are you sure you want to delete this conversation?</p>
+            <button className='convo-btn' onClick={deleteConversation}>Confirm</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   )
 }

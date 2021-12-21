@@ -4,10 +4,16 @@
   padding: 10px;
   margin-top: 10px;
   cursor: pointer;
+  justify-content: space-between;
 }
 
 .conversations:hover {
   background-color: #ededed;
+}
+
+.conversations-left {
+  display: flex;
+  align-items: center;
 }
 
 .convo-img {
@@ -20,4 +26,62 @@
 
 .convo-name {
   font-weight: 500;
+}
+
+.convo-dlt-btn {
+  background-color: white;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  padding: 6px 8px;
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.convo-dlt-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.popup-convo {
+	  margin: 0 auto;
+    width: 30%;
+    top: 25%;
+    right: 34%;
+	  max-height: 50%;
+	  text-align: center;
+	  background-color: white;
+    position: fixed;
+    z-index: 1005;
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow-y: scroll;
+    border-radius: 5px;
+}
+.popup-wrapper-convo {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1004;
+}
+
+.convo-btn {
+  background-color: white;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 20px 5px 5px 5px;
+}
+
+.convo-btn:hover {
+  background-color: black;
+  color: white;
 }

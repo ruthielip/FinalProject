@@ -17,8 +17,17 @@ const Messenger = () => {
   const {user} = useContext(AuthContext);
   const scrollRef = useRef();
 
+  const deleteConversation = async() => {
+    try {
+      await axios.delete(`/conversations/${currentChat._id}`);
+      window.location.reload();
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   useEffect(()=>{
-    socket.current = io('ws://localhost:8800');
+    socket.current = io.connect('ws://localhost:8800');
     socket.current.on('getMessage', data => {
       setArrivalMessage({
         sender: data.senderId,
@@ -101,7 +110,7 @@ const Messenger = () => {
             <h4 className='chats-title'>Chats</h4>
             {conversations.map((convo, i) =>(
               <div key={i} onClick={()=> setCurrentChat(convo)}>
-                <Conversations conversation={convo} currentUser={user}/>
+                <Conversations conversation={convo} currentUser={user} deleteConversation={deleteConversation}/>
               </div>
             ))}
           </div>
