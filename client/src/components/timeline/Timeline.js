@@ -10,7 +10,6 @@ const Timeline = (props) => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const {user} = useContext(AuthContext);
-  const [friend, setFriend] = useState({});
   const [followingDisplay, setFollowingDisplay] = useState('none');
   const [generalDisplay, setGeneralDisplay] = useState('block');
 

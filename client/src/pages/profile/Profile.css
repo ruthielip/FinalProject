@@ -343,3 +343,28 @@
   margin-bottom: 10px;
   float: left;
 }
+
+@media only screen and (max-width: 800px) {
+
+  .profile {
+    margin: 0;
+  }
+
+  .upload-cover, .plus {
+    display: none;
+  }
+
+  .message-button {
+    display: none;
+  }
+
+  .following img {
+    height: 50px;
+    width: 50px;
+  }
+
+  .following p {
+    display: none;
+  }
+
+}

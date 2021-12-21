@@ -1,7 +1,6 @@
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useRef, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useRef, useContext, useState } from 'react';
 import {loginCall} from '../../apiCalls';
 import { AuthContext } from '../../context/AuthContext';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -9,9 +8,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 const Login = () => {
   const email = useRef();
   const password = useRef();
-  const navigate = useNavigate();
   const [wrongInfo, setWrongInfo] = useState('none');
-  const {isFetching, dispatch, error, user} = useContext(AuthContext);
+  const {isFetching, dispatch} = useContext(AuthContext);
 
   const handleClick = async (e) => {
     e.preventDefault();

@@ -27,8 +27,8 @@ const Messenger = () => {
   }
 
   useEffect(()=>{
-    socket.current = io.connect('ws://localhost:8800');
-    socket.current.on('getMessage', data => {
+    socket.current = io('ws://localhost:8800');
+    socket.current.on('getMessage', (data) => {
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
@@ -44,8 +44,8 @@ const Messenger = () => {
 
   useEffect(()=>{
     socket.current.emit('addUser', user._id);
-    socket.current.on('getUsers', users=>{
-    })
+    // socket.current.on('getUsers', users=>{
+    // })
   },[user])
 
   useEffect(()=>{
@@ -80,7 +80,8 @@ const Messenger = () => {
       conversationId: currentChat._id
     };
 
-    const receiverId = currentChat.members.find(member => member !== user._id);
+    const receiverId = currentChat.members.find((member) => member !== user._id);
+    console.log(currentChat.members);
 
     socket.current.emit('sendMessage', {
       senderId: user._id,

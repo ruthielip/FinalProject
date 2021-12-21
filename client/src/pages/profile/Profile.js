@@ -83,7 +83,7 @@ const Profile = () => {
 
   useEffect(()=>{
     setMutualConversations(conversations.filter((c)=>c.members.includes(currentUser._id)))
-  },[conversations])
+  },[conversations, currentUser._id])
 
   const showFollowing = (e) => {
     e.preventDefault();
@@ -206,6 +206,7 @@ const Profile = () => {
         dispatch({ type: "FOLLOW", payload: user._id });
       }
       setIsFollowing(!isFollowing);
+      window.location.reload();
     } catch (err) {
     }
   };

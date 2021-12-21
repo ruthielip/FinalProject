@@ -22,10 +22,6 @@ const Post = (props) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const {user: currentUser} = useContext(AuthContext);
 
-  const commentArray = post.comments.map((comment)=>{
-    return comment._id
-  })
-
   useEffect(()=>{
     const getLikes = async ()=>{
       try{
@@ -120,7 +116,7 @@ const Post = (props) => {
     newComment.text = comment;
     try {
       await axios.put(`/posts/${post._id}/comment`, newComment);
-      window.location.href = window.location.href;
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
@@ -222,7 +218,7 @@ const Post = (props) => {
                       <Link key={i} className='following-link' to={`/profile/${liker.username}`} onClick={() => window.location.href(`/profile/${liker.username}`)}>
                        <div className='following-container'>
                       <div className='following'>
-                      <img src={liker.profilePicture ? PF + liker.profilePicture : PF + 'pp.png'}/>
+                      <img alt='' src={liker.profilePicture ? PF + liker.profilePicture : PF + 'pp.png'}/>
                       <div className='following-info'>
                         <h4>{liker.username}</h4>
                         <p>{liker.desc}</p>
@@ -281,10 +277,10 @@ const Post = (props) => {
                           <Link to={`/profile/${account.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${account.username}`)}>
                           <p className='comment-username'><strong>{account.username}</strong></p>
                           </Link>
-
                           </div>
-
                         )
+                      } else {
+                        return null
                       }
                     })
                   }

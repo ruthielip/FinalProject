@@ -5,11 +5,14 @@ import Register from './pages/login/Register';
 import Messenger from './pages/messenger/Messenger';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import useScroll from "./useScroll";
 import './App.css';
 
 function App() {
   const { user } = useContext(AuthContext);
+  const [loading] = useState(false);
+  useScroll(loading);
 
   return (
     <div>

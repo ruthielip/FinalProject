@@ -81,3 +81,9 @@
   background-color: rgba(255, 0, 0, 0.4);
   font-weight: 400;
 }
+
+@media only screen and (max-width: 800px) {
+  .main, .main-reg {
+    margin: 0;
+  }
+}

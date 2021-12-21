@@ -30,7 +30,9 @@ const Message = ( {message, own }) => {
               <Link key={i}  to={`../profile/${acc.username}`}>
               <img className='message-img' src={acc.profilePicture ? PF + acc.profilePicture : PF + 'pp.png'} alt=''/>
               </Link>
-            )}
+            )} else {
+              return null;
+            }
         })}
 
         <p className='message-text'>{message.text}</p>

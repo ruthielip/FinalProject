@@ -93,7 +93,6 @@ const Navbar = () => {
 
            <div className='icon'>
               <Link to='/messenger'><i className="far fa-comment-dots" style={{color: 'black'}}></i></Link>
-              {/*<span className='pink-icon'>2</span>*/}
            </div>
 
            <div className='icon'>
