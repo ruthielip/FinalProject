@@ -48,6 +48,12 @@ app.use('/api/posts', postRoute);
 app.use('/api/conversations', conversationRoute);
 app.use('/api/messages', messageRoute);
 
-app.listen(process.env.PORT, ()=>{
-  console.log(`listening on port ${process.env.PORT}`)
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
+app.listen(process.env.PORT || 5000, ()=>{
+  console.log("listening...")
 })
