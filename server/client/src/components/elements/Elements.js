@@ -1,6 +1,6 @@
 import './Elements.css';
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 import Post from '../post/Post';
 
 const Elements = (props) => {

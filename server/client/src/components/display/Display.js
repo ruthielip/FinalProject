@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import './Display.css';
 import Elements from '../elements/Elements';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 import { AuthContext } from '../../context/AuthContext';
 
 const Display = (props) => {

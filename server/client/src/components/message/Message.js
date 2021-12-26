@@ -1,7 +1,7 @@
 import './Message.css';
 import { format } from 'timeago.js';
 import { useEffect, useState } from 'react';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 import { Link } from 'react-router-dom'
 
 const Message = ( {message, own }) => {

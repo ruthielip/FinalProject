@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { useContext, useState, useEffect } from 'react';
 import Share from '../share/Share';
 import Select from 'react-select';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 
 const Navbar = () => {
   const {user} = useContext(AuthContext);
@@ -50,7 +50,7 @@ const Navbar = () => {
     { label: <div>
              <Link to={`/profile/${user.username}`} style={{textDecoration: 'none', color: 'black'}} onClick={() => window.location.href(`/profile/${user.username}`)}>
              <div  className='search-react'>
-             <img src={PF + user.profilePicture} height="40px" width="40px" style={{borderRadius: '50%', marginRight: '10px'}} alt=''/>
+             <img src={user.profilePicture ? PF + user.profilePicture : PF + 'pp.png'} height="40px" width="40px" style={{borderRadius: '50%', marginRight: '10px'}} alt=''/>
              <p>{user.username}</p>
              </div>
              </Link>

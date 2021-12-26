@@ -1,6 +1,6 @@
 import './Conversations.css';
 import { useState, useEffect } from 'react';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 
 const Conversations = ({conversation, currentUser, deleteConversation}) => {
   const [user, setUser] = useState([]);

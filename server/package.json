@@ -2,11 +2,15 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build"
   },
   "keywords": [],
   "author": "",

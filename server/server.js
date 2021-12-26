@@ -21,8 +21,13 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopolo
 app.use('/images', exp.static(path.join(__dirname, 'public/images')));
 
 app.use(exp.json());
-app.use(helmet());
 app.use(morgan('common'));
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb)=>{
@@ -48,7 +53,7 @@ app.use('/api/posts', postRoute);
 app.use('/api/conversations', conversationRoute);
 app.use('/api/messages', messageRoute);
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+app.use(exp.static(path.join(__dirname, "/client/build")));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build', 'index.html'));

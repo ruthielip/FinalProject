@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import './Timeline.css';
 import Post from '../post/Post';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 import { AuthContext } from '../../context/AuthContext';
 import General from './General';
 

@@ -1,6 +1,6 @@
 import './Post.css'
 import { useState, useEffect, useContext } from 'react';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';

@@ -4,7 +4,7 @@ import Conversations from '../../components/conversations/Conversations';
 import Message from '../../components/message/Message';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext, useState, useEffect, useRef } from 'react';
-import axiosInstance from '../../config';
+import { axiosInstance } from '../../config';
 
 const Messenger = () => {
   const [conversations, setConversations] = useState([]);
